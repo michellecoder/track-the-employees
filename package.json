@@ -1,0 +1,25 @@
+{
+  "name": "track-the-employees",
+  "version": "1.0.0",
+  "description": "An app for keeping departments and emplyee information organized",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/michellecoder/track-the-employees.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/michellecoder/track-the-employees/issues"
+  },
+  "homepage": "https://github.com/michellecoder/track-the-employees#readme",
+  "dependencies": {
+    "console.table": "^0.10.0",
+    "inquirer": "^8.1.2",
+    "mysql2": "^2.2.5"
+  }
+}
