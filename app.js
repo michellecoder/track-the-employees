@@ -9,7 +9,7 @@ const db = mysql.createConnection({
     user: "root",
     // MySQL password
     password: "kittycat",
-    database: "classlist_db",
+    database: "employee_db",
 });
 db.connect((err) => {
     if (err) throw err;
@@ -33,8 +33,35 @@ const mainfunc = () => {
         console.log(answer);
         if (answer.choice === "view all departments") {
             getAllDepartments();
+
+        } else if (answer.choice === "view all employees") {
+            getAllEmployees();
         }
+        if (answer.choice === "view all roles") {
+            getAllRoles();
+        }
+        if (answer.choice === "add a department") {
+            addADepartment();
+        }
+        if (answer.choice === "add an employee") {
+            addAnEmployee();
+        }
+
+        if (answer.choice === "add a role") {
+            addARole();
+        }
+
+
+        if (answer.choice === "update an employee role") {
+            updateEmployee();
+        }
+
+
     })
+
+
+
+
 };
 // For adding an ex role_id you want to do choices:[{name:"HR",value:1}]
 
@@ -50,5 +77,29 @@ const getAllDepartments = function() {
         console.table(results);
         mainfunc();
     });
+
+
 };
-// Default response for any other request (Not Found)
+
+
+const getAllRoles = function() {
+    db.query("SELECT * FROM role", function(err, results) {
+        if (err) throw err;
+        console.table(results);
+        mainfunc();
+    })
+};
+const addADepartment = function() {
+        inquirer.prompt([{
+            type: "input",
+            name: "department_name",
+            message: "What is the department name?"
+        }]).then(answer => {
+            db.query("INSERT INTO department SET ?", answer, function(err, results) {
+                if (err) throw err;
+                console.log(results);
+                mainfunc();
+            })
+        })
+    }
+    // Default response for any other request (Not Found)
