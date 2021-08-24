@@ -15,6 +15,7 @@ db.connect((err) => {
     if (err) throw err;
     mainfunc();
 });
+// Department and Get all information
 const mainfunc = () => {
     inquirer.prompt([{
         type: "list",
@@ -63,7 +64,7 @@ const mainfunc = () => {
 
 
 };
-// For adding an ex role_id you want to do choices:[{name:"HR",value:1}]
+
 
 // Query database
 const getAllEmployees = function() {
@@ -200,4 +201,3 @@ const updateEmployee = function() {
         })
     })
 };
-// Default response for any other request (Not Found)
