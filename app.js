@@ -90,16 +90,114 @@ const getAllRoles = function() {
     })
 };
 const addADepartment = function() {
-        inquirer.prompt([{
-            type: "input",
-            name: "department_name",
-            message: "What is the department name?"
-        }]).then(answer => {
-            db.query("INSERT INTO department SET ?", answer, function(err, results) {
-                if (err) throw err;
-                console.log(results);
-                mainfunc();
-            })
+    inquirer.prompt([{
+        type: "input",
+        name: "department_name",
+        message: "What is the department name?"
+    }]).then(answer => {
+        db.query("INSERT INTO department SET ?", answer, function(err, results) {
+            if (err) throw err;
+            console.log(results);
+            mainfunc();
         })
-    }
-    // Default response for any other request (Not Found)
+    })
+};
+
+const addARole = function() {
+    inquirer.prompt([{
+            type: "input",
+            name: "title",
+            message: "What is the role name?"
+        },
+        {
+            type: "input",
+            name: "salary",
+            message: "What is the salary for this role?"
+
+        },
+        {
+            type: "list",
+            name: "department_id",
+            message: "What is the department id for this role?",
+            choices: [{ name: "accounting", value: 1 }, { name: "HR", value: 2 }, { name: "IT", value: 3 }, { name: "Billing", value: 4 }]
+
+        }
+
+
+
+    ]).then(answer => {
+        db.query("INSERT INTO role SET ?", answer, function(err, results) {
+            if (err) throw err;
+            console.log(results);
+            mainfunc();
+        })
+    })
+};
+
+const addAnEmployee = function() {
+    inquirer.prompt([{
+            type: "input",
+            name: "first_name",
+            message: "What is the employee's first name?"
+
+        },
+        {
+
+            type: "input",
+            name: "last_name",
+            message: "What is the employee's last name?"
+
+        },
+        {
+            type: "list",
+            name: "role_id",
+            message: "What is the employee's role?",
+            choices: [{ name: "accountant", value: 1 }, { name: "hiring manager", value: 2 }, { name: "frontdesk representive", value: 3 }]
+        },
+        {
+            type: "list",
+            name: "manager_id",
+            message: "What is the employee'smanager id?",
+            choices: [{ name: "Sam Thompson", value: 1 }, { name: "Goku Dragonball", value: 2 }]
+        }
+
+
+
+    ]).then(answer => {
+        db.query("INSERT INTO employee SET ?", answer, function(err, results) {
+            if (err) throw err;
+            console.log(results);
+            mainfunc();
+        })
+    })
+};
+const updateEmployee = function() {
+    inquirer.prompt([
+
+        {
+            type: "list",
+            name: "employee_id",
+            message: "What is the employee you want to update?",
+            choices: [{ name: "Sam Thompson", value: 1 }, { name: "Goku Dragonball", value: 2 }]
+        },
+        {
+
+
+            type: "list",
+            name: "role_id",
+            message: "What is the employee's role?",
+            choices: [{ name: "accountant", value: 1 }, { name: "hiring manager", value: 2 }, { name: "frontdesk representive", value: 3 }]
+        },
+
+
+
+
+    ]).then(answer => {
+        db.query("UPDATE employee SET role_id=? WHERE id_employee=?", [answer.role_id, answer.employee_id], function(err, results) {
+            if (err) throw err;
+            console.log(results);
+            mainfunc();
+        })
+    })
+};
+// Default response for any other request (Not Found)
